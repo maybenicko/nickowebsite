@@ -1,0 +1,368 @@
+/* ------------------- RESET ------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::selection {
+  background: #ddcee6;
+  color: #101010;
+}
+
+body {
+  font-family: 'Sofia Sans Mono Light', monospace;
+  font-weight: 300;
+  background: #F7F7F7;
+  font-size: clamp(14px, 1vw + 0.25rem, 18px);
+  line-height: 1.6;
+}
+
+/* ------------------- SECTIONS ------------------- */
+.section {
+  min-height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: clamp(2rem, 6vw, 4rem) 10%;
+  padding-bottom: 0;
+  text-align: center;
+  background-color: inherit;
+  border: none;
+  margin: 0;
+}
+
+#about    { background: #101010; }
+#projects { background: #F7F7F7; }
+#journey  { background: #f9f9f9; }
+#connect  { background: #F7F7F7; }
+.footer   { background: #101010; color: #F7F7F7; }
+
+/* ------------------- HEADER ------------------- */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: clamp(1.5rem, 3.5vw, 2.5rem) clamp(1.5rem, 3.5vw, 2.5rem) 0 clamp(1.5rem, 3.5vw, 2.5rem);
+  z-index: 9999;
+  color: #F7F7F7;
+  mix-blend-mode: difference;
+}
+
+/* ------------------- LOGO ------------------- */
+.logo {
+  font-family: 'Sofia Sans Condensed Bold', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  line-height: 0.75;
+  letter-spacing: -0.12em;
+  cursor: pointer;
+  text-shadow: 0 0 1px rgba(0,0,0,0.3);
+  transform: scaleY(1.4);
+  color: #F7F7F7; 
+  z-index: 9999;
+}
+
+/* ------------------- MENU ------------------- */
+.menu ul {
+  list-style: none;
+  display: flex;
+  gap: clamp(1rem, 2.5vw, 2.5rem);
+}
+
+.menu a {
+  text-decoration: none;
+  font-family: 'Sofia Sans Mono Light', monospace;
+  font-weight: 300;
+  font-size: clamp(0.9rem, 1vw, 1.1rem);
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  color: #F7F7F7; 
+  padding: 0 0.75rem;
+}
+
+.nav-word {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.menu a:hover .nav-word {
+  transform: translateY(-4px);
+  color: #50ad0d;
+}
+
+/* ------------------- CONTACT BUTTON ------------------- */
+.contact {
+  position: relative;
+  text-decoration: none;
+  font-family: 'Sofia Sans Mono Regular', monospace;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: -0.015em;
+  color: #F7F7F7;
+  mix-blend-mode: difference;
+}
+
+.contact::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.contact:hover::after {
+  transform: scaleX(1);
+}
+
+/* ------------------- HERO SECTION ------------------- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1rem, 2vw, 2rem);
+  padding-top: 7%;
+}
+
+.hero-title {
+  font-family: 'Sofia Sans Condensed Bold', sans-serif;
+  font-weight: 700;
+  font-size: clamp(5rem, 12vw, 14rem);
+  line-height: 0.9;
+  letter-spacing: clamp(-6em, -1.4vw, -12px);
+  white-space: nowrap;
+  transform: scaleY(1.3);
+  text-shadow: 0 0 1px rgba(0,0,0,0.3);
+  margin: 2rem 0 0.5rem 0;
+  color: #101010;
+  z-index: 3;
+  text-align: center;
+}
+
+.hero-title::selection {
+  color: #F7F7F7;
+  background: #101010;
+}
+
+.hero-subtitle {
+  font-family: 'Sofia Sans Mono', monospace;
+  font-size: clamp(0.7rem, 1vw, 1rem);
+  letter-spacing: clamp(2px, 0.8vw, 8px);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  margin-left: 0.3rem;
+  padding-left: 0.5%;
+  color: #101010;
+}
+
+/* ------------------- HERO MEDIA ------------------- */
+.hero-media {
+  position: relative;
+  margin-left: 51%;
+  margin-top: -6%;
+  z-index: 2;
+  flex: 1 1 280px;
+  max-width: 350px;   
+}
+
+.hero-image {
+  width: clamp(200px, 25vw, 400px);
+  height: auto;
+  object-fit: cover;
+  border-radius: 2%;
+}
+
+/* ------------------- HERO BOX ------------------- */
+.hero-box {
+  margin-left: 20%;
+  margin-top: -29%;
+  width: clamp(500px, 60vw, 800px);
+  height: clamp(200px, 40vh, 400px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 0 0 3.5% 1%;
+  background-color: #f1f1f1; 
+  background-image: url("../images/florence.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: contain;
+  background-blend-mode: overlay;
+  font-family: 'Sofia Sans Condensed', sans-serif;
+  font-size: clamp(1.1rem, 2.2vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: left;
+  border-radius: 2%;
+  flex: 2 1 400px;
+}
+
+.hero-description {
+  margin-top: 3rem;
+  margin-bottom: 0;
+  max-width: 60ch;
+  text-align: center;
+  font-family: 'Sofia Sans Mono', monospace;
+  color: #101010;
+  opacity: 0.8;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ------------------- ABOUT SECTION ------------------- */
+.about-section {
+  padding: 0;
+}
+
+.about-header {
+  width: 100%;
+  background: #F7F7F7;
+  text-align: center;
+  padding: clamp(1rem, 3vh, 3rem) 0;
+}
+
+.about-title {
+  font-family: 'Sofia Sans Condensed Bold', sans-serif;
+  font-weight: 700;
+  font-size: clamp(4rem, 12vw, 10rem);
+  line-height: 0.9;
+  letter-spacing: clamp(-0.15em, -1vw, -18px);
+  white-space: nowrap;
+  transform: scaleY(1.3);
+  text-shadow: 0 0 1px rgba(0,0,0,0.3);
+  margin: 2rem 0 0.5rem 0;
+  color: #101010;
+}
+
+.about-content {
+  max-width: 70ch;
+  margin: clamp(2rem, 6vh, 4rem) auto;
+  padding: 0 5%;
+  text-align: center;
+  font-family: 'Sofia Sans Mono', monospace;
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  line-height: 1.6;
+  color: #F7F7F7;
+}
+
+.about-title::selection {
+  color: #F7F7F7;
+  background-color: #101010;
+}
+
+/* Split the About layout in two columns */
+.about-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 4vw, 3rem);
+  align-items: stretch;
+  margin: clamp(2rem, 6vh, 4rem) 0;
+}
+
+/* Left: game window */
+.about-window {
+  flex: 0.9;
+  background: #101010;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(300px, 40vh, 600px);
+  max-width: 90%;
+  margin-left: 2%;
+  margin-bottom: 2rem;
+}
+
+#gameCanvas {
+  width: 100%;
+  height: 100%;
+  background: #101010;
+  border: 0.15rem solid #7a7a7a;
+  border-radius: 1rem;
+  display: block;
+  aspect-ratio: 4 / 4;
+  max-width: 500px;
+}
+
+/* Right: text column */
+.about-text {
+  flex: 1;
+  text-align: justify;
+  text-transform: uppercase;
+  color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 4vh, 3rem);
+  margin-right: 5%;
+}
+
+.about-text h2 {
+  font-family: 'Sofia Sans Mono Light', monospace;
+  margin-bottom: 0.5rem;
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  color: #7a7a7a;
+  font-weight: 300;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.about-text p {
+  line-height: 1.8;
+  color: #ddd;
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  font-weight: 300;
+}
+
+.about-text h2::selection {
+  color: #F7F7F7;
+  background-color: #101010;
+}
+
+.about-text p::selection {
+  color: #101010;
+  background-color: #F7F7F7;
+}
+
+/* ------------------- PROJECTS SECTION ------------------- */
+.projects-section {
+  padding: 0;
+}
+
+.projects-header {
+  width: 100%;
+  background: #101010;
+  text-align: center;
+  padding: clamp(1rem, 3vh, 3rem) 0;
+}
+
+.projects-title {
+  font-family: 'Sofia Sans Condensed Bold', sans-serif;
+  font-weight: 700;
+  font-size: clamp(4rem, 12vw, 10rem);
+  line-height: 0.9;
+  letter-spacing: clamp(-0.15em, -1vw, -18px);
+  white-space: nowrap;
+  transform: scaleY(1.3);
+  text-shadow: 0 0 1px rgba(0,0,0,0.3);
+  margin: 2rem 0 0.5rem 0;
+  color: #f7f7f7;
+}
+
+.projects-title::selection {
+  color: #101010;
+  background-color: #F7F7F7;
+}

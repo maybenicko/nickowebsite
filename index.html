@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NT</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Condensed" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header (fixed) -->
+  <header class="header">
+    <div class="logo">NICCOLÒ<br><span>TRONCONI</span></div>
+    <nav class="menu">
+      <ul>
+        <li><a href="#about">[ <span class="nav-word">ABOUT ME</span> ]</a></li>
+        <li><a href="#projects">[ <span class="nav-word">PROJECTS</span> ]</a></li>
+        <li><a href="#journey">[ <span class="nav-word">JOURNEY</span> ]</a></li>
+        <li><a href="#connect">[ <span class="nav-word">CONNECT</span> ]</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="contact">CONTACT ME</a>
+  </header>
+
+  <!-- Smooth scroll wrapper -->
+  <div class="scroll-container">
+    <div class="scroll-content" id="scroll-content">
+
+      <!-- Sections -->
+      <section id="landing" class="section hero">
+        <h1 class="hero-title">FINTECH STUDENT</h1>
+        <p class="hero-subtitle">BASED IN ITALY</p>
+
+        <div class="hero-media">
+          <img src="images/profile.jpg" alt="Profile picture" class="hero-image">
+        </div>
+
+        <div class="hero-box">
+          <p>/ FINANCE</p>
+          <p>/ MANAGEMENT</p>
+          <p>/ TECH ENTHUSIAST</p>
+        </div>
+
+        <p class="hero-description">
+          INTERESTED IN FINANCE BECAUSE I ENJOY STRATEGY, TECH BECAUSE I ENJOY INNOVATION AND MANAGEMENT BECAUSE I ENJOY STRUCTURE; WHICH IS FUNNY BECAUSE MY DESKTOP HAS 87 RANDOM FILES CALLED "FINAL_V2_REAL_FINAL"
+        </p>
+      </section>
+
+      <section id="about" class="section about-section">
+        <div class="about-header">
+          <h1 id="about-text" class="about-title">ABOUT ME</h1>
+        </div>
+
+        <div class="about-layout">
+          
+          <!-- Left: Game Window -->
+          <div class="about-window">
+            <canvas id="gameCanvas"></canvas>
+          </div>
+
+          <!-- Right: All Text -->
+          <div class="about-text">
+            <div class="about-block">
+              <h2>[ PARIS. TURIN. BERLIN. REPEAT. ]</h2>
+              <p>
+                Decided to move between Paris, Turin & Berlin for “studies". 
+                Accidentally learned economics, management, and that intercultural 
+                basically means arguing in 3 different languages about where to eat.
+                 Also, hi finance, nice to meet u.
+              </p>
+            </div>
+
+            <div class="about-block">
+              <h2>[ WHERE FINANCE MEETS TECH ]</h2>
+              <p>
+                Ti odio Milano ti amo. The traffic, the noise, the rent that makes 
+                me question every life choice.Between overpriced espresso and the 
+                library grind, I somehow fed my finance curiosity and nerdy tech 
+                brain. Now I’m coping by coding this website instead of sleeping.
+              </p>
+            </div>
+
+            <div class="about-block">
+              <h2>[ THEM SIDE QUESTS ]</h2>
+              <p>
+                My tech passion? Started from writing sneaker bots - yes, I was one
+                 of those people. Now it’s called “innovation.” Tennis and snowboarding
+                  are great too… until my bank account tells me to sit down. And 
+                  music? Mostly rap. Nothing like hyping myself up for nights I’ll 
+                  probably regret the morning after
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <section id="projects" class="section projects-section">
+        <div class="projects-header">
+          <h1 id="projects-text" class="projects-title">PROJECTS</h1>
+        </div>
+        <h2>Projects</h2>
+        <p>Showcase selected projects with links and images.</p>
+      </section>
+
+      <section id="journey" class="section">
+        <h2>Journey</h2>
+        <p>Timeline of your studies, experiences, and key achievements.</p>
+      </section>
+
+      <section id="connect" class="section">
+        <h2>Connect</h2>
+        <p>Links to LinkedIn, GitHub, etc.</p>
+      </section>
+
+      <footer id="contact" class="section footer">
+        <h2>Contact Me</h2>
+        <p>Email: your@email.com</p>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
