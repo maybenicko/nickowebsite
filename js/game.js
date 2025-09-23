@@ -12,16 +12,13 @@ if (canvas) {
   }
 
   // Ball
-  let x = canvas.width / 2;
-  let y = canvas.height / 2;
-  let dx = (Math.random() < 0.5 ? -1 : 1) * (2 + Math.random() * 2); // random speed/direction
-  let dy = (Math.random() < 0.5 ? -1 : 1) * (2 + Math.random() * 2);
+  let x, y, dx, dy;
   const ballRadius = 10;
 
   // Paddle
   const paddleHeight = 10;
   const paddleWidth = 80;
-  let paddleX = (canvas.width - paddleWidth) / 2;
+  let paddleX;
   let rightPressed = false;
   let leftPressed = false;
 
@@ -29,12 +26,19 @@ if (canvas) {
   let score = 0;
   let highScore = 0;
   let gameOver = false;
+  let gameStarted = false;
 
   // Controls
   document.addEventListener("keydown", e => {
     if (e.key === "Right" || e.key === "ArrowRight") rightPressed = true;
     else if (e.key === "Left" || e.key === "ArrowLeft") leftPressed = true;
+    else if (e.code === "Space") {
+      if (!gameStarted || gameOver) {
+        startGame();
+      }
+    }
   });
+
   document.addEventListener("keyup", e => {
     if (e.key === "Right" || e.key === "ArrowRight") rightPressed = false;
     else if (e.key === "Left" || e.key === "ArrowLeft") leftPressed = false;
@@ -58,20 +62,38 @@ if (canvas) {
     ctx.closePath();
   }
 
-  // Draw text (instructions, score)
+  // Draw info
   function drawInfo() {
     ctx.fillStyle = "#f7f7f7";
     ctx.font = "16px monospace";
+    ctx.textAlign = "start";
     ctx.fillText("USE ⬅ ➡ ARROWS", 20, 30);
 
-    ctx.fillText("SCORE: " + score, canvas.width - 130, 30);
-    ctx.fillText("BEST: " + highScore, canvas.width - 130, 55);
+    ctx.textAlign = "end";
+    ctx.fillText("SCORE: " + score, canvas.width - 20, 30);
+    ctx.fillText("BEST: " + highScore, canvas.width - 20, 55);
+
+    ctx.textAlign = "start";
+  }
+
+  // Draw start screen
+  function drawStart() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawInfo();
+
+    ctx.fillStyle = "#f7f7f7";
+    ctx.font = "24px monospace";
+    ctx.textAlign = "center";
+    ctx.fillText("PRESS SPACE TO START", canvas.width / 2, canvas.height / 2);
+    ctx.textAlign = "start";
   }
 
   // Draw Game Over screen
   function drawGameOver() {
     ctx.fillStyle = "#101010";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    drawInfo();
 
     ctx.fillStyle = "#f7f7f7";
     ctx.font = "28px monospace";
@@ -83,15 +105,15 @@ if (canvas) {
     ctx.fillStyle = "#6a0dad";
     ctx.fillText("PRESS SPACE TO REPLAY", canvas.width / 2, canvas.height / 2 + 60);
 
-    ctx.textAlign = "start"; // reset for other text
+    ctx.textAlign = "start";
   }
 
-  // Reset game
-  function resetGame() {
+  // Reset game values
+  function startGame() {
     x = canvas.width / 2;
     y = canvas.height / 2;
 
-    // Randomize direction + speed (2 to 4)
+    // Random direction + speed (2–4)
     const dirX = Math.random() < 0.5 ? -1 : 1;
     const dirY = Math.random() < 0.5 ? -1 : 1;
     dx = dirX * (2 + Math.random() * 2);
@@ -101,18 +123,19 @@ if (canvas) {
     if (score > highScore) highScore = score;
     score = 0;
     gameOver = false;
-    draw();
-  }
+    gameStarted = true;
 
-  document.addEventListener("keydown", e => {
-    if (e.code === "Space" && gameOver) {
-      resetGame();
-    }
-  });
+    requestAnimationFrame(draw);
+  }
 
   // Main draw loop
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (!gameStarted) {
+      drawStart();
+      return;
+    }
 
     if (gameOver) {
       drawGameOver();
@@ -128,8 +151,8 @@ if (canvas) {
     if (y + dy < ballRadius) dy = -dy;
     else if (y + dy > canvas.height - ballRadius - paddleHeight - 10) {
       if (x > paddleX && x < paddleX + paddleWidth) {
-        dy = -(dy + 0.3); // bounce faster
-        dx += (Math.random() - 0.5) * 0.6; // add randomness sideways
+        dy = -(dy + 0.3);
+        dx += (Math.random() - 0.5) * 0.6;
         score++;
       } else {
         gameOver = true;
@@ -146,5 +169,6 @@ if (canvas) {
     requestAnimationFrame(draw);
   }
 
-  draw();
+  // Show idle/start screen initially
+  drawStart();
 }
