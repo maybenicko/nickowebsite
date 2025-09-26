@@ -33,9 +33,9 @@ body {
   margin: 0;
 }
 
-#about    { background: #101010; }
-#projects { background: #F7F7F7; }
-#journey  { background: #f9f9f9; }
+#about    { background: linear-gradient(to bottom, #f7f7f7 0% 30%, #101010 20% 100%) }
+#projects { background: linear-gradient(to bottom, #101010 0% 30%, #f7f7f7 20% 100%) }
+#journey  { background: #F7F7F7; }
 #connect  { background: #F7F7F7; }
 .footer   { background: #101010; color: #F7F7F7; }
 
@@ -152,7 +152,7 @@ body {
   text-align: center;
 }
 
-.hero-title::selection {
+.hero-title::selection, .hero-subtitle::selection, .hero-box p::selection {
   color: #F7F7F7;
   background: #101010;
 }
@@ -166,11 +166,6 @@ body {
   margin-left: 0.3rem;
   padding-left: 0.5%;
   color: #101010;
-}
-
-.hero-subtitle::selection {
-  color: #F7F7F7;
-  background: #101010;
 }
 
 /* ------------------- HERO MEDIA ------------------- */
@@ -221,11 +216,6 @@ body {
   color: #101010;
 }
 
-.hero-box p::selection {
-  color: #F7F7F7;
-  background-color: #101010;
-}
-
 .hero-description {
   margin-top: 3rem;
   margin-bottom: 0;
@@ -244,13 +234,13 @@ body {
 }
 
 /* ------------------- ABOUT SECTION ------------------- */
+
 .about-section {
   padding: 0;
 }
 
 .about-header {
   width: 100%;
-  background: #F7F7F7;
   text-align: center;
   padding: clamp(1rem, 3vh, 3rem) 0;
 }
@@ -266,17 +256,6 @@ body {
   text-shadow: 0 0 1px rgba(0,0,0,0.3);
   margin: 2rem 0 0.5rem 0;
   color: #101010;
-}
-
-.about-content {
-  max-width: 70ch;
-  margin: clamp(2rem, 6vh, 4rem) auto;
-  padding: 0 5%;
-  text-align: center;
-  font-family: 'Sofia Sans Mono', monospace;
-  font-size: clamp(0.9rem, 1.2vw, 1rem);
-  line-height: 1.6;
-  color: #F7F7F7;
 }
 
 .about-title::selection {
@@ -296,7 +275,6 @@ body {
 /* Left: game window */
 .about-window {
   flex: 0.9;
-  background: #101010;
   border-radius: 1rem;
   display: flex;
   align-items: center;
@@ -310,8 +288,7 @@ body {
 #gameCanvas {
   width: 100%;
   height: 100%;
-  background: #101010;
-  border: 0.15rem solid #7a7a7a;
+    border: 0.15rem solid #7a7a7a;
   border-radius: 1rem;
   display: block;
   aspect-ratio: 4 / 4;
@@ -358,13 +335,14 @@ body {
 }
 
 /* ------------------- PROJECTS SECTION ------------------- */
+/* ------------------- PROJECTS SECTION ------------------- */
+
 .projects-section {
   padding: 0;
 }
 
 .projects-header {
   width: 100%;
-  background: #101010;
   text-align: center;
   padding: clamp(1rem, 3vh, 3rem) 0;
 }
@@ -378,59 +356,65 @@ body {
   white-space: nowrap;
   transform: scaleY(1.3);
   text-shadow: 0 0 1px rgba(0,0,0,0.3);
-  margin: 2rem 0 0.5rem 0;
+  margin: clamp(1.5rem, 4vh, 3rem) 0 clamp(0.5rem, 2vh, 1rem) 0;
   color: #f7f7f7;
 }
 
-.projects-title::selection {
-  color: #101010;
-  background-color: #F7F7F7;
-}
 
+/* ------------------- PROJECT GRID ------------------- */
 
-/* ------------------- PROJECT CARDS ------------------- */
-/* Nascondi front al hover */
 .projects-grid {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   gap: 0;
   width: 100%;
-  height: 550px; /* altezza fissa per mantenere consistenza */
+  height: clamp(350px, 70vh, 800px);
+  text-transform: uppercase;
 }
+
+
+/* ------------------- PROJECT CARD ------------------- */
 
 .project-card {
   flex: 1;
-  border: 1px solid #000;
+  border: 1px solid #101010;
+  border-top: none;
+  border-bottom: none;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: flex 0.4s ease;
+  transition: flex 1.5s ease;
   position: relative;
 }
 
 .project-card:hover {
-  flex: 2; /* si espande spingendo le altre lateralmente */
+  flex: 4;
 }
 
-.card-front, .card-back {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-  transition: opacity 0.3s ease;
-}
+
+/* ------------------- CARD FRONT ------------------- */
 
 .card-front {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 10px;
-  opacity: 1;
+  gap: clamp(0.5rem, 1vh, 1rem);
   text-align: left;
+  transform: scaleX(0.8);
+  padding: clamp(1rem, 2vw, 2rem);
+}
 
+.card-front .card-title {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.6s ease-in-out;
+}
+
+.project-card:hover .card-front .card-title {
+  clip-path: inset(100% 0 0 0); /* disappears upward */
 }
 
 .card-front h3 {
@@ -439,59 +423,179 @@ body {
   font-size: clamp(1.5rem, 2.5vw, 2rem);
   line-height: 1.1;
   letter-spacing: -0.1em;
-  margin-bottom: 10px;
+  margin-bottom: clamp(0.5rem, 1vh, 1rem);
   color: #101010;
 }
 
-.project-card:hover .card-front {
-  opacity: 0; /* nasconde il front */
-  pointer-events: none;
-}
+
+/* ------------------- CARD BACK ------------------- */
 
 .card-back {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  opacity: 0;
+  padding: clamp(1rem, 2vw, 2rem);
 }
 
-.project-card:hover .card-back {
-  opacity: 1; /* mostra il back */
-}
-
+/* Back title: hidden by default, revealed after front is gone */
 .card-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  align-items: center;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: clamp(0.5rem, 2vh, 1.5rem);
 }
+
+.card-header .card-title {
+  margin: 0;
+  text-align: right;
+  clip-path: inset(100% 0 0 0);   /* hidden */
+  transition: clip-path 0.6s ease-in-out;
+}
+
+.project-card:hover .card-header .card-title {
+  clip-path: inset(0 0 0 0);      /* revealed */
+  transition-delay: 0.6s;         /* wait for front to finish */
+}
+
+
+/* ------------------- CARD NUMBER ------------------- */
+
+.card-number {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: bold;
+  display: inline-block;
+  transition: transform 0.6s ease, font-size 0.6s ease;
+}
+
+.project-card:hover .card-number {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  transform: scale(1.2);
+}
+
+
+/* ------------------- CARD CONTENT ------------------- */
 
 .card-content {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 20px;
+  gap: clamp(0.5rem, 2vw, 1.5rem);
 }
 
+/* List appears after back title */
 .card-list {
   list-style: none;
   padding: 0;
   margin: 0;
   font-weight: bold;
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(10px);
+  transition: clip-path 0.2s ease-in-out, transform 0.2s ease;
 }
 
+.project-card:hover .card-list {
+  clip-path: inset(0 0 0 0);
+  transform: translateY(0);
+    transition: clip-path 0.8s ease-in-out, transform 0.8s ease;
+  transition-delay: 1.2s; /* after back title */
+}
+
+.card-list li {
+  text-align: left;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.1em;
+}
+
+
+/* Image appears staggered with the list */
 .card-back img {
-  width: 40%;   /* immagine più piccola */
+  display: block;
+  width: clamp(250px, 50%, 500px);
   height: auto;
-  border-radius: 6px;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.2s ease-in-out;
 }
 
+.card-back img.image {
+  box-shadow: 0 24px 48px rgba(0,0,0,.5);
+}
+
+.project-card:hover .card-back img {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.8s ease-in-out;
+  transition-delay: 1.4s; /* after list */
+  user-select: none;
+}
+
+
+/* Description last */
 .card-description {
   text-align: justify;
-  margin-top: 20px;
-  font-size: 14px;
-  line-height: 1.6;
+  margin-top: clamp(0.5rem, 2vh, 1.5rem);
+  font-size: clamp(0.9rem, 1.1vw, 1rem);
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 1s ease;
+}
+
+.project-card:hover .card-description {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1s ease, transform 1s ease;
+  transition-delay: 1.6s; /* after image */
+}
+
+
+/* ------------------- TYPOGRAPHY & SELECTION ------------------- */
+
+.card-back .card-number,
+.card-title {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  letter-spacing: -0.075em;
+}
+
+.card-list::selection,
+.card-description::selection,
+.card-title::selection,
+.card-number::selection,
+.card-list li::selection {
+  color: #f7f7f7;
+  background-color: #101010;
 }
 
 
 
+/* ------------------- JOURNEY SECTION ------------------- */
+
+.journey-section {
+  padding: 0;
+}
+
+.journey-header {
+  width: 100%;
+  text-align: center;
+  padding: clamp(1rem, 3vh, 3rem) 0;
+}
+
+.journey-title {
+  font-family: 'Sofia Sans Condensed Bold', sans-serif;
+  font-weight: 700;
+  font-size: clamp(4rem, 12vw, 10rem);
+  line-height: 0.9;
+  letter-spacing: clamp(-0.15em, -1vw, -18px);
+  white-space: nowrap;
+  transform: scaleY(1.3);
+  text-shadow: 0 0 1px rgba(0,0,0,0.3);
+  margin: 2rem 0 0.5rem 0;
+  color: #101010;
+}
+
+.journey-title::selection {
+  color: #F7F7F7;
+  background-color: #101010;
+}

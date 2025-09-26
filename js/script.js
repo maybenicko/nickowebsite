@@ -98,7 +98,8 @@ function animateTitle(elementId, word) {
 // --- Animate ABOUT ME ---
 document.addEventListener('DOMContentLoaded', () => {
   animateTitle("about-text", "ABOUT ME");
-  animateTitle("projects-text", "PROJECTS"); // 🔥 added for PROJECTS
+  animateTitle("projects-text", "PROJECTS");
+  animateTitle("journey-text", "JOURNEY");
 });
 
 // Animate About Me paragraphs on scroll
