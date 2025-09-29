@@ -1,3 +1,22 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const warning = document.getElementById("screen-warning");
+  const content = document.querySelector(".scroll-container");
+
+  function checkRatio() {
+    const ratio = window.innerWidth / window.innerHeight;
+    if (ratio < 1.45) {
+      warning.classList.remove("hidden");
+      content.style.display = "none";
+    } else {
+      warning.classList.add("hidden");
+      content.style.display = "";
+    }
+  }
+
+  checkRatio();
+  window.addEventListener("resize", checkRatio);
+});
+
 const content = document.getElementById("scroll-content");
 
 let current = 0;   // current position (animated)
@@ -99,7 +118,8 @@ function animateTitle(elementId, word) {
 document.addEventListener('DOMContentLoaded', () => {
   animateTitle("about-text", "ABOUT ME");
   animateTitle("projects-text", "PROJECTS");
-  animateTitle("journey-text", "JOURNEY");
+  animateTitle("journey-text", "ABOUT ME");
+  animateTitle("connect-text", "CONNECT");
 });
 
 // Animate About Me paragraphs on scroll
@@ -121,3 +141,56 @@ document.querySelectorAll('.project-card').forEach(card => {
     card.classList.toggle('active');
   });
 });
+
+/* adding bigtext effect */
+document.addEventListener("DOMContentLoaded", () => {
+  const journeyText = document.querySelector(".journey-bigtext");
+
+  function wrapLetters(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent;
+      const frag = document.createDocumentFragment();
+
+      text.split("").forEach(char => {
+        if (char === " ") {
+          frag.appendChild(document.createTextNode(" "));
+        } else {
+          const span = document.createElement("span");
+          span.classList.add("letter");
+          span.textContent = char;
+          frag.appendChild(span);
+        }
+      });
+
+      node.replaceWith(frag);
+    } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== "BR") {
+      [...node.childNodes].forEach(wrapLetters);
+    }
+  }
+
+  wrapLetters(journeyText);
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const letters = document.querySelectorAll(".journey-bigtext .letter");
+
+  letters.forEach((letter, i) => {
+    letter.addEventListener("mouseenter", () => {
+      letters.forEach((l, j) => {
+        const dist = Math.abs(i - j);
+        if (dist === 0) {
+          l.style.transform = "scale(1.3)";
+        } else if (dist < 6) { // up to 5 letters away
+          const shift = (0.1 / dist).toFixed(2); // smaller shift for farther letters
+          l.style.transform = `translateX(${j < i ? -shift + "em" : shift + "em"})`;
+        }
+      });
+    });
+
+    letter.addEventListener("mouseleave", () => {
+      letters.forEach(l => (l.style.transform = ""));
+    });
+  });
+});
+

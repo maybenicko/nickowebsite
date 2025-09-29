@@ -1,3 +1,28 @@
+
+#screen-warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #101010; /* dark background */
+  color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Sofia Sans Condensed Bold', sans-serif;
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  z-index: 99999;
+  text-align: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+#screen-warning.hidden {
+  display: none;
+}
+
+
 /* ------------------- RESET ------------------- */
 * {
   margin: 0;
@@ -13,7 +38,6 @@
 body {
   font-family: 'Sofia Sans Mono Light', monospace;
   font-weight: 300;
-  background: #F7F7F7;
   font-size: clamp(14px, 1vw + 0.25rem, 18px);
   line-height: 1.6;
 }
@@ -33,9 +57,10 @@ body {
   margin: 0;
 }
 
+#landing  { background: #F7F7F7; }
 #about    { background: linear-gradient(to bottom, #f7f7f7 0% 30%, #101010 20% 100%) }
 #projects { background: linear-gradient(to bottom, #101010 0% 30%, #f7f7f7 20% 100%) }
-#journey  { background: #F7F7F7; }
+#journey  { background: linear-gradient(to bottom, #f7f7f7 0% 25%, #101010 20% 100%) }
 #connect  { background: #F7F7F7; }
 .footer   { background: #101010; color: #F7F7F7; }
 
@@ -335,7 +360,6 @@ body {
 }
 
 /* ------------------- PROJECTS SECTION ------------------- */
-/* ------------------- PROJECTS SECTION ------------------- */
 
 .projects-section {
   padding: 0;
@@ -599,3 +623,69 @@ body {
   color: #F7F7F7;
   background-color: #101010;
 }
+
+/* JOURNEY SECTION */
+.journey-section {
+  background: #101010;
+  color: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  flex-direction: column;
+}
+
+/* Container */
+.journey-content {
+  margin-top: 5%;
+  margin-left: 13%;
+  margin-bottom: 5%;
+}
+
+/* Subtitle */
+.journey-subtitle {
+  margin-top: 2rem;
+  font-family: 'Sofia Sans Mono', monospace;
+  font-size: 1.25rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+  color: #bfbfbf;
+}
+
+/* Big text */
+.journey-bigtext {
+  margin-top: 4%;
+  font-family: 'Sofia Sans Mono', monospace;
+  font-weight: 300;
+  font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 0.8;
+  text-transform: uppercase;
+  letter-spacing: clamp(-0.06em, -0.5vw, -15px);
+  transform: scaleX(0.9);
+  position: relative;
+  display: inline-block;
+}
+
+.journey-bigtext .letter {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.75, -0.75, 0.25, 1.75),
+    color 0.25s ease;
+  will-change: transform, color;
+  cursor: default;
+  color: #f7f7f7;
+}
+
+.journey-bigtext .letter:hover {
+  color: #7a7a7a; /* grey on hover */
+}
+
+.journey-line {
+  display: block; /* each <br> line */
+}
+
+.journey-bigtext .letter::selection {
+  background: #f7f7f7;
+  color: #101010;
+}
+
