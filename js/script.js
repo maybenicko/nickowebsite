@@ -1,3 +1,5 @@
+/* ---------------------- SCREEN WARNING ---------------------- */
+
 document.addEventListener("DOMContentLoaded", () => {
   const warning = document.getElementById("screen-warning");
   const content = document.querySelector(".scroll-container");
@@ -17,6 +19,44 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", checkRatio);
 });
 
+/* ---------------------- HEADER MENU ---------------------- */
+document.querySelectorAll('.nav-word').forEach(word => {
+  let letters = word.textContent.split('');
+  word.innerHTML = '';
+
+  letters.forEach((letter, i) => {
+    let span = document.createElement('span');
+    span.classList.add('letter');
+    span.style.setProperty('--delay', `${i * 0.05}s`);
+
+    // uso NBSP per mantenere gli spazi visibili
+    let top = document.createElement('span');
+    top.textContent = letter === ' ' ? '\u00A0' : letter;
+
+    let bottom = document.createElement('span');
+    bottom.textContent = letter === ' ' ? '\u00A0' : letter;
+
+    span.appendChild(top);
+    span.appendChild(bottom);
+
+    word.appendChild(span);
+  });
+
+  // gestione hover via classi (in/out animazioni)
+  const link = word.closest('a');
+  link.addEventListener('mouseenter', () => {
+    word.classList.remove('unhover');
+    word.classList.add('active');
+  });
+  link.addEventListener('mouseleave', () => {
+    word.classList.remove('active');
+    word.classList.add('unhover');
+  });
+});
+
+
+
+/* ---------------------- SCROLL BEHAVIOR ---------------------- */
 const content = document.getElementById("scroll-content");
 
 let current = 0;   // current position (animated)
@@ -60,7 +100,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// --- Animate Title Function ---
+
+/* ---------------------- TITLES ANIMATION ---------------------- */
 function animateTitle(elementId, word) {
   const element = document.getElementById(elementId);
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -118,7 +159,7 @@ function animateTitle(elementId, word) {
 document.addEventListener('DOMContentLoaded', () => {
   animateTitle("about-text", "ABOUT ME");
   animateTitle("projects-text", "PROJECTS");
-  animateTitle("journey-text", "ABOUT ME");
+  animateTitle("journey-text", "JOURNEY");
   animateTitle("connect-text", "CONNECT");
 });
 
@@ -193,4 +234,119 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const options = document.querySelectorAll("#terminal-options div");
+
+  const popupContent = {
+    0: "For me, Fintech is not just about banking faster, it is a state of mind. It's about resolvig inefficiencies at the root cause and leveraging technology to increase performance.",
+    1: "My Philosophy: Always learn, iterate fast, and embrace failure as feedback.",
+    2: "My Values: Curiosity, integrity, resilience.",
+    3: "My Hobbies: Tennis, snowboarding, sneaker culture, music.",
+    4: "What Drives Me: Building efficient systems and exploring fintech innovation.",
+    5: "IMAGE",
+    6: "CLEAR"
+  };
+
+  const list_images = [
+    "../images/profile.jpg",
+    "../images/jumpman.jpg",
+    "../images/nicko.jpg"
+  ];
+
+  options.forEach(opt => {
+    opt.addEventListener("click", () => {
+      const id = opt.getAttribute("data-option");
+
+      // Echo the user's choice in the terminal output
+      const terminal = document.getElementById("terminal");
+      const echo = document.createElement("div");
+      echo.classList.add("echo-line");
+      echo.innerHTML = `<span class="prompt">niccolo@cli ~ % </span>${id}`;
+      terminal.appendChild(echo);
+
+      if (id === "5") {
+        // IMAGE: pick random image
+        const randomImg = list_images[Math.floor(Math.random() * list_images.length)];
+        createPopup("Random Image", `<img src="${randomImg}" style="max-width:100%; border-radius:4px;">`);
+        return;
+      }
+
+      if (id === "6") {
+        // CLEAR: remove all echo lines
+        document.querySelectorAll(".echo-line").forEach(line => line.remove());
+        return;
+      }
+
+      // Then open popup
+      const cleanTitle = opt.textContent.replace(/^.*\)\s*/, "");
+
+  // Add the prompt prefix to the body
+      const bodyText = `<span class="prompt">niccolo@cli ~ % </span>${popupContent[id]}`;
+
+      // Then open popup
+      createPopup(cleanTitle, bodyText);
+    });
+  });
+
+  function createPopup(title, text) {
+    const popup = document.createElement("div");
+    popup.classList.add("popup");
+
+    const header = document.createElement("div");
+    header.classList.add("popup-header");
+
+    // traffic-light buttons
+    const red = document.createElement("span");
+    red.classList.add("popup-btn", "red");
+    const yellow = document.createElement("span");
+    yellow.classList.add("popup-btn", "yellow");
+    const green = document.createElement("span");
+    green.classList.add("popup-btn", "green");
+
+    // close on red click
+    red.addEventListener("click", () => popup.remove());
+
+    // title text
+    const titleSpan = document.createElement("span");
+    titleSpan.classList.add("title");
+    titleSpan.textContent = title;
+
+    header.appendChild(red);
+    header.appendChild(yellow);
+    header.appendChild(green);
+    header.appendChild(titleSpan);
+
+    const body = document.createElement("div");
+    body.classList.add("popup-body");
+    body.innerHTML = text;
+
+    popup.appendChild(header);
+    popup.appendChild(body);
+    document.body.appendChild(popup);
+
+    // draggable
+    let isDragging = false, offsetX, offsetY;
+    header.addEventListener("mousedown", (e) => {
+      if (e.target.classList.contains("popup-btn")) return;
+      isDragging = true;
+      offsetX = e.clientX - popup.offsetLeft;
+      offsetY = e.clientY - popup.offsetTop;
+      document.body.style.userSelect = "none";
+    });
+    document.addEventListener("mousemove", (e) => {
+      if (isDragging) {
+        popup.style.left = `${e.clientX - offsetX}px`;
+        popup.style.top = `${e.clientY - offsetY}px`;
+      }
+    });
+    document.addEventListener("mouseup", () => {
+      isDragging = false;
+      document.body.style.userSelect = "";
+    });
+  }
+
+});
+
 

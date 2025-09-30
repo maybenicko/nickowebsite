@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Condensed" rel="stylesheet">
 </head>
 <body>
+  <canvas id="cursorScope"></canvas>
 
   <div id="screen-warning">
     <p>USE YOUR COMPUTER</p>
@@ -19,10 +20,10 @@
     <div class="logo">NICCOLÒ<br><span>TRONCONI</span></div>
     <nav class="menu">
       <ul>
-        <li><a href="#about">[ <span class="nav-word">ABOUT ME</span> ]</a></li>
-        <li><a href="#projects">[ <span class="nav-word">PROJECTS</span> ]</a></li>
-        <li><a href="#journey">[ <span class="nav-word">JOURNEY</span> ]</a></li>
-        <li><a href="#connect">[ <span class="nav-word">CONNECT</span> ]</a></li>
+        <li><a href="#about">[ <span class="nav-word"> ABOUT ME </span>]</a></li>
+        <li><a href="#projects">[ <span class="nav-word"> PROJECTS </span>]</a></li>
+        <li><a href="#journey">[ <span class="nav-word"> JOURNEY </span>]</a></li>
+        <li><a href="#connect">[ <span class="nav-word"> CONNECT </span>]</a></li>
       </ul>
     </nav>
     <a href="#contact" class="contact">CONTACT ME</a>
@@ -48,7 +49,7 @@
         </div>
 
         <p class="hero-description">
-          INTERESTED IN FINANCE BECAUSE I ENJOY STRATEGY, TECH BECAUSE I ENJOY INNOVATION AND MANAGEMENT BECAUSE I ENJOY STRUCTURE; WHICH IS FUNNY BECAUSE MY DESKTOP HAS 87 RANDOM FILES CALLED "FINAL_V2_REAL_FINAL"
+          FINTECH IS NOT JUST ABOUT BANKING. IT IS A TOOL FOR SOLVING INEFFICIENCIES AND INCREASE PERFORMANCE.
         </p>
       </section>
 
@@ -61,7 +62,24 @@
           
           <!-- Left: Game Window -->
           <div class="about-window">
-            <canvas id="gameCanvas"></canvas>
+            <div class="terminal-header">
+              <span class="terminal-btn red"></span>
+              <span class="terminal-btn yellow"></span>
+              <span class="terminal-btn green"></span>
+              <div class="terminal-title">niccolo@cli</div>
+            </div>
+            <div id="terminal">
+              <pre id="terminal-output">niccolo@cli ~ % Welcome to Niccolò's CLI.<br>niccolo@cli ~ % Select an option to continue</pre>
+              <div id="terminal-options">
+                <div data-option="0"><span class="prompt">niccolo@cli ~ % </span>0) What is FinTech?</div>
+                <div data-option="1"><span class="prompt">niccolo@cli ~ % </span>1) My Philosophy</div>
+                <div data-option="2"><span class="prompt">niccolo@cli ~ % </span>2) My Values</div>
+                <div data-option="3"><span class="prompt">niccolo@cli ~ % </span>3) My Hobbies</div>
+                <div data-option="4"><span class="prompt">niccolo@cli ~ % </span>4) What Drives Me</div>
+                <div data-option="5"><span class="prompt">niccolo@cli ~ % </span>5) Surprise!</div>
+                <div data-option="6"><span class="prompt">niccolo@cli ~ % </span>6) Clear Terminal</div>
+              </div>
+            </div>
           </div>
 
           <!-- Right: All Text -->
@@ -269,17 +287,7 @@
         <div class="journey-header"> 
           <h1 id="journey-text" class="journey-title"></h1> 
         </div>
-        <div class="journey-content">
-          <h2 class="journey-subtitle">FOR ME</h2>
-          <h1 class="journey-bigtext">
-            FINTECH <br>
-            IS NOT JUST <br>
-            BANKING, BUT <br>
-            A TOOL FOR EFFICIENCY <br>
-            AND PERFORMANCE.
-          </h1>
-          
-        </div>
+        <p>test</p>
       </section>
 
       <section id="connect" class="section connect-section">
@@ -298,6 +306,6 @@
   </div>
 
   <script src="js/script.js"></script>
-  <script src="js/game.js"></script>
+  <script src="js/cursor.js"></script>
 </body>
 </html>
