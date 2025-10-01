@@ -245,8 +245,9 @@ document.addEventListener("DOMContentLoaded", () => {
     2: "My Values: Curiosity, integrity, resilience.",
     3: "My Hobbies: Tennis, snowboarding, sneaker culture, music.",
     4: "What Drives Me: Building efficient systems and exploring fintech innovation.",
-    5: "IMAGE",
-    6: "CLEAR"
+    5: "Curriculum Vitae",
+    6: "IMAGE",
+    7: "CLEAR"
   };
 
   const list_images = [
@@ -267,13 +268,28 @@ document.addEventListener("DOMContentLoaded", () => {
       terminal.appendChild(echo);
 
       if (id === "5") {
+        // PDF preview inside popup without default toolbar
+        createPopup("Download CV", `
+          <embed src="cv.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" 
+            type="application/pdf"
+            class="pdf-embed">
+          </embed>
+          <div class="pdf-download">
+            <a href="cv.pdf" download>⬇ Download PDF</a>
+          </div>
+        `);
+        return;
+      }
+
+
+      if (id === "6") {
         // IMAGE: pick random image
         const randomImg = list_images[Math.floor(Math.random() * list_images.length)];
         createPopup("Random Image", `<img src="${randomImg}" style="max-width:100%; border-radius:4px;">`);
         return;
       }
 
-      if (id === "6") {
+      if (id === "7") {
         // CLEAR: remove all echo lines
         document.querySelectorAll(".echo-line").forEach(line => line.remove());
         return;
@@ -350,3 +366,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+function updateTime() {
+  const now = new Date().toLocaleTimeString("en-GB", {
+    timeZone: "Europe/Rome",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  });
+  document.getElementById("local-time").textContent = now;
+}
+
+updateTime();
+setInterval(updateTime, 1000);

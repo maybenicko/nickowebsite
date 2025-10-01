@@ -61,6 +61,9 @@ body {
   font-weight: 300;
   font-size: clamp(14px, 1vw + 0.25rem, 18px);
   line-height: 1.6;
+  background-color: var(--color-white);
+  background-image: radial-gradient(var(--color-light-grey) 1px, transparent 1px);
+  background-size: 30px 30px; /* grid spacing */
 }
 
 /* ------------------- SECTIONS ------------------- */
@@ -78,12 +81,6 @@ body {
   margin: 0;
 }
 
-#landing  { background: var(--color-white); }
-#about    { background: linear-gradient(to bottom, var(--color-white) 0% 30%, var(--color-black) 25% 100%) }
-#projects { background: linear-gradient(to bottom, var(--color-black) 0% 30%, var(--color-white) 20% 100%) }
-#journey  { background: linear-gradient(to bottom, var(--color-white) 0% 25%, var(--color-black) 20% 100%) }
-#connect  { background: var(--color-white); }
-.footer   { background: var(--color-black); color: var(--color-white); }
 
 /* ------------------- HEADER ------------------- */
 .header {
@@ -95,7 +92,7 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   padding: clamp(1.5rem, 3.5vw, 2.5rem) clamp(1.5rem, 3.5vw, 2.5rem) 0 clamp(1.5rem, 3.5vw, 2.5rem);
-  z-index: 9999;
+  z-index: 999;
   color: var(--color-white);
   mix-blend-mode: difference;
 }
@@ -232,7 +229,8 @@ body {
 }
 
 
-/* ------------------- HERO SECTION ------------------- */
+/* ------------------- LANDING SECTION ------------------- */
+
 .hero {
   min-height: 100vh;
   display: flex;
@@ -356,10 +354,9 @@ body {
 .about-header {
   width: 100%;
   text-align: center;
-  padding: clamp(1rem, 3vh, 3rem) 0;
 }
 
-.about-title {
+/*.about-title {
   font-family: 'Sofia Sans Condensed Bold', sans-serif;
   font-weight: 700;
   font-size: clamp(4rem, 12vw, 10rem);
@@ -370,6 +367,15 @@ body {
   text-shadow: 0 2px 6px rgba(0,0,0,0.6);
   margin: 2rem 0 0.5rem 0;
   color: var(--color-black);
+}*/
+
+.about-title {
+  font-family: 'Sofia Sans Condensed Bold', sans-serif;
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0.15rem;
 }
 
 .about-title::selection {
@@ -381,9 +387,10 @@ body {
 .about-layout {
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(1rem, 4vw, 3rem);
+  column-gap: clamp(1rem, 4vw, 3rem);
   align-items: stretch;
-  margin: clamp(1.5rem, 4vh, 3rem) 0 clamp(1.5rem, 4vh, 3rem) 0;
+  margin: clamp(1.5rem, 4vh, 3rem) 0 0;
+  background: var(--color-black);
 }
 
 /* Left: game window */
@@ -520,7 +527,7 @@ body {
   color: var(--color-pink);
 }
 
-#terminal-options div::selection, #terminal-options div span::selection {
+#terminal-options div::selection, #terminal-options div span::selection, .pdf-download a::selection {
   color: var(--color-white);
   background-color: var(--color-pink);
 }
@@ -538,7 +545,37 @@ body {
   font-family: "Menlo", "Courier New", monospace;
   font-size: 13px;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  z-index: 1000;
+  z-index: 9999;
+}
+
+.pdf-embed {
+  width:100%; 
+  height:450px; 
+  border:none; 
+  border-radius:4px; 
+  overflow:hidden;
+}
+
+.pdf-download {
+  margin-top: 10px;
+  text-align: right;
+  width: 100%;
+}
+
+.pdf-download a {
+  text-decoration: none;
+  padding: 8px 14px;
+  background: #2c2c2c;
+  color: #fff;
+  border-radius: 4px;
+  border: 1px solid #555;
+  transition: background 0.4s ease, border-color 0.4s ease;
+  text-transform: uppercase;
+}
+
+.pdf-download a:hover {
+  background: var(--color-pink);
+  border-color: var(--color-light-grey);
 }
 
 /* Popup header styled like macOS terminal */
@@ -613,6 +650,7 @@ body {
   flex-direction: column;
   gap: clamp(1rem, 4vh, 3rem);
   margin-right: 5%;
+  margin: clamp(1.5rem, 4vh, 3rem) 0 0 0;
 }
 
 .about-text h2 {
@@ -652,9 +690,11 @@ body {
   width: 100%;
   text-align: center;
   padding: clamp(1rem, 3vh, 3rem) 0;
+  background: transparent;
+  order: 3;
 }
 
-.projects-title {
+/*.projects-title {
   font-family: 'Sofia Sans Condensed Bold', sans-serif;
   font-weight: 700;
   font-size: clamp(4rem, 12vw, 10rem);
@@ -664,6 +704,16 @@ body {
   transform: scaleY(1.3);
   text-shadow: 0 2px 5px rgba(255, 255, 255, 0.6);
   margin: clamp(1.5rem, 4vh, 3rem) 0 clamp(0.5rem, 2vh, 1rem) 0;
+  color: var(--color-white);
+}*/
+
+.projects-title {
+  font-family: 'Sofia Sans Condensed Bold', sans-serif;
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0.15rem;
   color: var(--color-white);
 }
 
@@ -683,6 +733,7 @@ body {
   width: 100%;
   height: clamp(350px, 70vh, 800px);
   text-transform: uppercase;
+  margin: clamp(1rem, 2vh, 4rem) 0 0 0;
 }
 
 
@@ -876,3 +927,194 @@ body {
   background-color: var(--color-pink);
 }
 
+
+/*
+ .projects-title {
+  font-family: 'Sofia Sans Condensed Bold', sans-serif;
+  font-weight: 700;
+  font-size: clamp(4rem, 12vw, 10rem);
+  line-height: 0.9;
+  letter-spacing: clamp(-0.15em, -1vw, -18px);
+  white-space: nowrap;
+  transform: scaleY(1.3);
+  text-shadow: 0 2px 5px rgba(255, 255, 255, 0.6);
+  margin: clamp(1.5rem, 4vh, 3rem) 0 clamp(0.5rem, 2vh, 1rem) 0;
+  color: var(--color-white);
+}
+*/
+
+/* ------------------- CONNECT TITLE ------------------- */
+.connect-header {
+  text-align: center;
+}
+
+.connect-overline {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6rem; /* spread letters apart */
+  margin: 1rem 0;
+  color: var(--color-black);
+}
+
+.connect-title {
+  font-family: 'Sofia Sans Condensed Bold', sans-serif;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0.15rem;
+  margin: 0.5rem 0;
+  color: var(--color-black);
+}
+
+.connect-subline {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6rem; /* spread letters apart */
+  margin: 1rem 0;
+  color: var(--color-black);
+}
+
+
+
+/* ------------------- CONNECT FORM (minimal underline style) ------------------- */
+.connect-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 600px;
+  width: 100%;
+  margin: 4rem auto 4rem auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-family: 'Sofia Sans Condensed', sans-serif; /* or a monospace for similar look */
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  color: var(--color-black);
+}
+
+.form-group input,
+.form-group textarea {
+  border: none;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  padding: 0.6rem 0;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  resize: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--color-pink);
+}
+
+.connect-btn {
+  margin-top: 1rem;
+  align-self: center;
+  font-family: 'Sofia Sans Condensed Bold', sans-serif;
+  font-size: 0.9rem;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.8rem 1.6rem;
+  border: 1px solid var(--color-black);
+  background: transparent;
+  color: var(--color-black);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden; 
+  position: relative;  
+}
+
+.connect-btn span {
+ font-size: 1.1rem; 
+}
+
+.connect-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%) rotate(25deg);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+/* Hover: streak + pink highlight */
+.connect-btn:hover {
+  color: var(--color-white);
+  background: var(--color-pink);
+  border-color: var(--color-pink);
+}
+
+.connect-btn:hover::after {
+  transform: translateX(100%) rotate(25deg);
+}
+
+.connect-header::selection, .connect-overline::selection, .connect-title::selection, .connect-subline::selection, .form-group input::selection, .form-group textarea::selection, .connect-btn::selection, .connect-btn span::selection {
+  color: var(--color-white);
+  background-color: var(--color-pink);
+}
+
+
+/* ------------------- FOOTER ------------------- */
+.footer {
+  color: var(--color-black);
+  padding: 0rem 2rem 1.5rem 2rem;
+  font-family: 'Sofia Sans Mono', monospace;
+  font-size: 1.1rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;  /* left & right split */
+  align-items: flex-end;           /* align both to bottom */
+  flex-wrap: wrap;                 /* safe on mobile */
+}
+
+.footer-location {
+  font-size: 1.1rem;
+}
+
+.footer-contact {
+  text-align: right;
+}
+
+.footer-contact p {
+  margin: 0.05rem 0;
+}
+
+
+.footer-contact .email {
+  cursor: pointer;
+}
+
+.footer-contact .email:hover {
+  text-decoration: underline;
+}
+
+
+.footer-location::selection, .footer-location span::selection, .footer-contact::selection, .footer-contact p::selection, .footer-contact .email::selection {
+  color: var(--color-white);
+  background-color: var(--color-pink);
+}
