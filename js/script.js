@@ -251,9 +251,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const list_images = [
-    "../images/profile.jpg",
-    "../images/jumpman.jpg",
-    "../images/nicko.jpg"
+    "images/profile.jpg",
+    "images/jumpman.jpg",
+    "images/nicko.jpg"
   ];
 
   options.forEach(opt => {
