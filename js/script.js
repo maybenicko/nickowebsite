@@ -1,4 +1,7 @@
-/* ---------------------- SCREEN WARNING ---------------------- */
+/* ------------------------------------------------ */
+/* ---------------- SCREEN WARNING ---------------- */
+/* ------------------------------------------------ */
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const warning = document.getElementById("screen-warning");
@@ -19,7 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", checkRatio);
 });
 
-/* ---------------------- HEADER MENU ---------------------- */
+
+/* ------------------------------------------------ */
+/* ------------------ HEADER ROLL ----------------- */
+/* ------------------------------------------------ */
+
+
 document.querySelectorAll('.nav-word').forEach(word => {
   let letters = word.textContent.split('');
   word.innerHTML = '';
@@ -29,7 +37,6 @@ document.querySelectorAll('.nav-word').forEach(word => {
     span.classList.add('letter');
     span.style.setProperty('--delay', `${i * 0.05}s`);
 
-    // uso NBSP per mantenere gli spazi visibili
     let top = document.createElement('span');
     top.textContent = letter === ' ' ? '\u00A0' : letter;
 
@@ -38,11 +45,9 @@ document.querySelectorAll('.nav-word').forEach(word => {
 
     span.appendChild(top);
     span.appendChild(bottom);
-
     word.appendChild(span);
   });
 
-  // gestione hover via classi (in/out animazioni)
   const link = word.closest('a');
   link.addEventListener('mouseenter', () => {
     word.classList.remove('unhover');
@@ -55,29 +60,27 @@ document.querySelectorAll('.nav-word').forEach(word => {
 });
 
 
+/* ------------------------------------------------ */
+/* --------------- SCROLL BEHAVIOR ---------------- */
+/* ------------------------------------------------ */
 
-/* ---------------------- SCROLL BEHAVIOR ---------------------- */
+
 const content = document.getElementById("scroll-content");
 
-let current = 0;   // current position (animated)
-let target = 0;    // target position (real scroll substitute)
-let ease = 0.08;   // smaller = slower, larger = faster
+let current = 0; 
+let target = 0;  
+let ease = 0.08; 
 
-// scale factor: <1 = less movement, >1 = more movement
 const scrollFactor = 0.3;
-
-// prevent browser’s native scrolling
 document.body.style.overflow = "hidden";
 
-// listen to wheel events and adjust target
 window.addEventListener("wheel", (e) => {
   target += e.deltaY * scrollFactor;
-  // clamp so you don’t scroll past content
+
   const maxScroll = content.getBoundingClientRect().height - window.innerHeight;
   target = Math.max(0, Math.min(target, maxScroll));
 }, { passive: false });
 
-// Smooth scrolling animation
 function smoothScroll() {
   current += (target - current) * ease;
   content.style.transform = `translateY(-${current}px)`;
@@ -85,7 +88,6 @@ function smoothScroll() {
 }
 smoothScroll();
 
-// NAVIGATION: smooth scroll to sections
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener("click", function(e) {
     e.preventDefault();
@@ -95,22 +97,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
     if (section) {
       const sectionTop = section.offsetTop;
-      target = sectionTop; // set target scroll position
+      target = sectionTop; 
     }
   });
 });
+
+
+/* ------------------------------------------------ */
+/* --------------- TITLE ANIMATION ---------------- */
+/* ------------------------------------------------ */
+
+
 document.addEventListener('DOMContentLoaded', () => {
   initStackedTitles();
   observeTitles();
 });
 
-/** Wrap title text into vertical stacked letters (3 copies per char). */
 function initStackedTitles() {
   const selectors = ['.about-title', '.projects-title', '.connect-title'];
   document.querySelectorAll(selectors.join(',')).forEach(title => {
-    if (title.querySelector('.stacked')) return; // avoid double-wrapping
+    if (title.querySelector('.stacked')) return;
 
-    const text = title.textContent; // keep original spacing
+    const text = title.textContent; 
     const frag = document.createDocumentFragment();
 
     for (const ch of text) {
@@ -123,9 +131,9 @@ function initStackedTitles() {
       }
       const letter = document.createElement('span');
       letter.className = 'stacked';
-      const a = document.createElement('span'); a.textContent = ch; // top
-      const b = document.createElement('span'); b.textContent = ch; // middle
-      const c = document.createElement('span'); c.textContent = ch; // bottom
+      const a = document.createElement('span'); a.textContent = ch; 
+      const b = document.createElement('span'); b.textContent = ch;
+      const c = document.createElement('span'); c.textContent = ch;
       letter.append(a, b, c);
       frag.appendChild(letter);
     }
@@ -135,7 +143,6 @@ function initStackedTitles() {
   });
 }
 
-/** Trigger the collapse when each title enters the viewport. */
 function observeTitles() {
   const titles = document.querySelectorAll('.about-title, .projects-title, .connect-title');
 
@@ -147,14 +154,13 @@ function observeTitles() {
       letters.forEach((letter, i) => {
         const top = letter.children[0];
         const bottom = letter.children[2];
-        const d = i * 99; // stagger in ms
+        const d = i * 99; 
 
         top.style.animationDelay = `${d}ms`;
         bottom.style.animationDelay = `${d}ms`;
         letter.classList.add('active');
       });
 
-      // animate once; remove this line if you want it to re-trigger
       io.unobserve(entry.target);
     });
   }, { threshold: 0.55 });
@@ -163,7 +169,11 @@ function observeTitles() {
 }
 
 
-/* ---------------------- TERMINAL INTERACTIONS ---------------------- */
+/* ------------------------------------------------ */
+/* ------------ TERMINAL INTERACTIONS ------------- */
+/* ------------------------------------------------ */
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const options = document.querySelectorAll("#terminal-options div");
 
@@ -195,7 +205,6 @@ document.addEventListener("DOMContentLoaded", () => {
   "images/13.jpg",
   "images/14.jpeg",
   "images/15.jpeg",
-  "images/16.JPG",
   "images/17.jpeg",
   "images/18.jpeg",
   "images/19.jpeg",
@@ -208,7 +217,6 @@ document.addEventListener("DOMContentLoaded", () => {
     opt.addEventListener("click", () => {
       const id = opt.getAttribute("data-option");
 
-      // Echo the user's choice in the terminal output
       const terminal = document.getElementById("terminal");
       const echo = document.createElement("div");
       echo.classList.add("echo-line");
@@ -216,7 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
       terminal.appendChild(echo);
 
       if (id === "5") {
-        // PDF preview inside popup without default toolbar
         createPopup("Download CV", `
           <embed src="cv.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" 
             type="application/pdf"
@@ -231,25 +238,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       if (id === "6") {
-        // IMAGE: pick random image
         const randomImg = list_images[Math.floor(Math.random() * list_images.length)];
         createPopup("Memories", `<img src="${randomImg}" alt="${randomImg}" style="max-width:100%; border-radius:4px;">`);
         return;
       }
 
       if (id === "7") {
-        // CLEAR: remove all echo lines
         document.querySelectorAll(".echo-line").forEach(line => line.remove());
         return;
       }
 
-      // Then open popup
       const cleanTitle = opt.textContent.replace(/^.*\)\s*/, "");
-
-  // Add the prompt prefix to the body
       const bodyText = `<span class="prompt">niccolo@cli ~ % </span>${popupContent[id]}`;
-
-      // Then open popup
       createPopup(cleanTitle, bodyText);
     });
   });
@@ -261,7 +261,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const header = document.createElement("div");
     header.classList.add("popup-header");
 
-    // traffic-light buttons
     const red = document.createElement("span");
     red.classList.add("popup-btn", "red");
     const yellow = document.createElement("span");
@@ -269,10 +268,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const green = document.createElement("span");
     green.classList.add("popup-btn", "green");
 
-    // close on red click
     red.addEventListener("click", () => popup.remove());
 
-    // title text
     const titleSpan = document.createElement("span");
     titleSpan.classList.add("title");
     titleSpan.textContent = title;
@@ -290,7 +287,6 @@ document.addEventListener("DOMContentLoaded", () => {
     popup.appendChild(body);
     document.body.appendChild(popup);
 
-    // draggable
     let isDragging = false, offsetX, offsetY;
     header.addEventListener("mousedown", (e) => {
       if (e.target.classList.contains("popup-btn")) return;
@@ -312,6 +308,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
+
+/* ------------------------------------------------ */
+/* ----------------- TIME TRACKER ----------------- */
+/* ------------------------------------------------ */
 
 
 function updateTime() {
