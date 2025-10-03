@@ -99,161 +99,109 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+document.addEventListener('DOMContentLoaded', () => {
+  initStackedTitles();
+  observeTitles();
+});
 
+/** Wrap title text into vertical stacked letters (3 copies per char). */
+function initStackedTitles() {
+  const selectors = ['.about-title', '.projects-title', '.connect-title'];
+  document.querySelectorAll(selectors.join(',')).forEach(title => {
+    if (title.querySelector('.stacked')) return; // avoid double-wrapping
 
-/* ---------------------- TITLES ANIMATION ---------------------- */
-function animateTitle(elementId, word) {
-  const element = document.getElementById(elementId);
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const text = title.textContent; // keep original spacing
+    const frag = document.createDocumentFragment();
 
-  const cyclesPerLetter = 10;   // how many random letters before correct one
-  const cycleDelay = 50;        // ms delay between random letters
-  const letterDelay = 80;       // ms pause before moving to next letter
-
-  function animateText(element, word) {
-    let currentLetterIndex = 0;
-
-    function animateLetter() {
-      if (currentLetterIndex >= word.length) return;
-
-      let cycleCount = 0;
-      const correctLetter = word[currentLetterIndex];
-      let displayedText = element.textContent;
-
-      const interval = setInterval(() => {
-        cycleCount++;
-
-        const randomChar = chars[Math.floor(Math.random() * chars.length)];
-
-        if (cycleCount < cyclesPerLetter && correctLetter !== " ") {
-          element.textContent = displayedText + randomChar;
-        } else {
-          element.textContent = displayedText + correctLetter;
-          clearInterval(interval);
-
-          setTimeout(() => {
-            currentLetterIndex++;
-            animateLetter();
-          }, letterDelay);
-        }
-      }, cycleDelay);
+    for (const ch of text) {
+      if (ch === ' ') {
+        const space = document.createElement('span');
+        space.className = 'stack-space';
+        space.innerHTML = '&nbsp;';
+        frag.appendChild(space);
+        continue;
+      }
+      const letter = document.createElement('span');
+      letter.className = 'stacked';
+      const a = document.createElement('span'); a.textContent = ch; // top
+      const b = document.createElement('span'); b.textContent = ch; // middle
+      const c = document.createElement('span'); c.textContent = ch; // bottom
+      letter.append(a, b, c);
+      frag.appendChild(letter);
     }
 
-    animateLetter();
-  }
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        element.textContent = ""; // reset
-        animateText(element, word);
-        observer.unobserve(element); // run once only
-      }
-    });
-  }, { threshold: 0.5 });
-
-  observer.observe(element);
+    title.textContent = '';
+    title.appendChild(frag);
+  });
 }
 
-// --- Animate ABOUT ME ---
-document.addEventListener('DOMContentLoaded', () => {
-  animateTitle("about-text", "ABOUT ME");
-  animateTitle("projects-text", "PROJECTS");
-  animateTitle("journey-text", "JOURNEY");
-  animateTitle("connect-text", "CONNECT");
-});
+/** Trigger the collapse when each title enters the viewport. */
+function observeTitles() {
+  const titles = document.querySelectorAll('.about-title, .projects-title, .connect-title');
 
-// Animate About Me paragraphs on scroll
-const aboutParas = document.querySelectorAll(".about-block p");
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
 
-const paraObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-    }
-  });
-}, { threshold: 0.2 });
+      const letters = entry.target.querySelectorAll('.stacked');
+      letters.forEach((letter, i) => {
+        const top = letter.children[0];
+        const bottom = letter.children[2];
+        const d = i * 99; // stagger in ms
 
-aboutParas.forEach(p => paraObserver.observe(p));
-
-
-document.querySelectorAll('.project-card').forEach(card => {
-  card.addEventListener('click', () => {
-    card.classList.toggle('active');
-  });
-});
-
-/* adding bigtext effect */
-document.addEventListener("DOMContentLoaded", () => {
-  const journeyText = document.querySelector(".journey-bigtext");
-
-  function wrapLetters(node) {
-    if (node.nodeType === Node.TEXT_NODE) {
-      const text = node.textContent;
-      const frag = document.createDocumentFragment();
-
-      text.split("").forEach(char => {
-        if (char === " ") {
-          frag.appendChild(document.createTextNode(" "));
-        } else {
-          const span = document.createElement("span");
-          span.classList.add("letter");
-          span.textContent = char;
-          frag.appendChild(span);
-        }
+        top.style.animationDelay = `${d}ms`;
+        bottom.style.animationDelay = `${d}ms`;
+        letter.classList.add('active');
       });
 
-      node.replaceWith(frag);
-    } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== "BR") {
-      [...node.childNodes].forEach(wrapLetters);
-    }
-  }
-
-  wrapLetters(journeyText);
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  const letters = document.querySelectorAll(".journey-bigtext .letter");
-
-  letters.forEach((letter, i) => {
-    letter.addEventListener("mouseenter", () => {
-      letters.forEach((l, j) => {
-        const dist = Math.abs(i - j);
-        if (dist === 0) {
-          l.style.transform = "scale(1.3)";
-        } else if (dist < 6) { // up to 5 letters away
-          const shift = (0.1 / dist).toFixed(2); // smaller shift for farther letters
-          l.style.transform = `translateX(${j < i ? -shift + "em" : shift + "em"})`;
-        }
-      });
+      // animate once; remove this line if you want it to re-trigger
+      io.unobserve(entry.target);
     });
+  }, { threshold: 0.55 });
 
-    letter.addEventListener("mouseleave", () => {
-      letters.forEach(l => (l.style.transform = ""));
-    });
-  });
-});
+  titles.forEach(t => io.observe(t));
+}
 
 
+/* ---------------------- TERMINAL INTERACTIONS ---------------------- */
 document.addEventListener("DOMContentLoaded", () => {
   const options = document.querySelectorAll("#terminal-options div");
 
   const popupContent = {
     0: "For me, Fintech is not just about banking faster, it is a state of mind. It's about resolvig inefficiencies at the root cause and leveraging technology to increase performance.",
-    1: "My Philosophy: Always learn, iterate fast, and embrace failure as feedback.",
-    2: "My Values: Curiosity, integrity, resilience.",
-    3: "My Hobbies: Tennis, snowboarding, sneaker culture, music.",
-    4: "What Drives Me: Building efficient systems and exploring fintech innovation.",
+    1: "To me, philosophy is not something abstract, but something you live every day. Mine comes down to three principles: persistence, openness and curiosity. Persistence means showing up, even when things get hard, something I learned through competitive sports. Openness means being willing to learn from every experience, whether it’s a failed project or a new skill. Curiosity means constantly looking for ways to improve, explore and innovate.",
+    2: "My values? Keep it real, keep it moving and keep it fun. I don’t believe in pretending to be perfect. I’d rather stay authentic and keep learning along the way. Curiosity is a value for me because asking “why not?” has led to some of my best projects. Consistency is another: small daily steps matter way more than big speeches.",
+    3: "I used to play tennis competitively, which basically trained me to be stubborn, disciplined and okay with losing. Now I spend winters on a snowboard, summers chasing golf balls and whenever possible I’m out windsurfing. Somewhere in between, I fell into sneaker culture, what started as collecting turned into reselling and eventually into building sneaker bots. So yes, my hobbies range from crashing on slopes to crashing servers, but at least they keep me balanced.",
+    4: "I’m driven by curiosity and the thrill of building something special. I like to understand how things work, break them down and then put them back together in a smarter way. Curiosity has also pushed me outside of my comfort zone, from studying in different countries to taking on projects in areas I’d never explored before. Each time, I’ve learned to adapt, grow and see challenges not as obstacles but as opportunities to expand my skills and perspective.",
     5: "Curriculum Vitae",
     6: "IMAGE",
     7: "CLEAR"
   };
 
   const list_images = [
-    "images/profile.jpg",
-    "images/jumpman.jpg",
-    "images/nicko.jpg"
+  "images/0.jpg",
+  "images/1.jpg",
+  "images/2.jpg",
+  "images/3.jpg",
+  "images/4.jpg",
+  "images/5.jpeg",
+  "images/6.jpeg",
+  "images/7.jpeg",
+  "images/8.jpeg",
+  "images/9.jpeg",
+  "images/10.jpeg",
+  "images/11.jpeg",
+  "images/12.jpeg",
+  "images/13.jpg",
+  "images/14.jpeg",
+  "images/15.jpeg",
+  "images/16.JPG",
+  "images/17.jpeg",
+  "images/18.jpeg",
+  "images/19.jpeg",
+  "images/20.jpeg",
+  "images/21.jpeg",
+  "images/22.jpeg"
   ];
 
   options.forEach(opt => {
@@ -285,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (id === "6") {
         // IMAGE: pick random image
         const randomImg = list_images[Math.floor(Math.random() * list_images.length)];
-        createPopup("Random Image", `<img src="${randomImg}" style="max-width:100%; border-radius:4px;">`);
+        createPopup("Memories", `<img src="${randomImg}" alt="${randomImg}" style="max-width:100%; border-radius:4px;">`);
         return;
       }
 
