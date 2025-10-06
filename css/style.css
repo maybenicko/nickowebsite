@@ -590,14 +590,6 @@ body {
   background-color: var(--color-pink);
 }
 
-/*
-
-align-items: center;
-  position: relative;
-  display: flex;
-  justify-content: flex-start;
-*/
-
 .popup {
   position: absolute;
   top: 20%;
