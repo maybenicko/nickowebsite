@@ -64,7 +64,6 @@ body.scope-on { cursor: none; }
 body {
   font-family: 'Sofia Sans Mono Light', monospace;
   font-weight: 300;
-  font-size: clamp(14px, 1vw + 0.25rem, 18px);
   line-height: 1.6;
   background-color: var(--color-white);
   background-image: radial-gradient(#cccccc 1px, transparent 1px);
@@ -159,7 +158,7 @@ body {
 
 .logo {
   font-family: 'Sofia Sans Condensed Bold', sans-serif;
-  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-size: clamp(1rem, 1.15vw, 2rem);
   font-weight: 900;
   text-transform: uppercase;
   line-height: 0.8;
@@ -176,14 +175,14 @@ body {
 .menu ul {
   list-style: none;
   display: flex;
-  gap: clamp(2rem, 3.5vw, 3.5rem);
+  gap: clamp(2rem, 3.5vw, 5.5rem);
 }
 
 .menu a {
   text-decoration: none;
   font-family: 'Sofia Sans Mono Light', monospace;
   font-weight: 300;
-  font-size: clamp(0.9rem, 1vw, 1.1rem);
+  font-size: clamp(0.9rem, 1vw, 2rem);
   line-height: 1.2;
   letter-spacing: 0.1em;
   color: var(--color-white); 
@@ -246,7 +245,7 @@ body {
   text-decoration: none;
   font-family: 'Sofia Sans Mono Regular', monospace;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 1.3vw, 2rem);
   letter-spacing: -0.015em;
   color: transparent; 
   padding: 0.25em 0.5em;
@@ -291,10 +290,8 @@ body {
 
 
 .hero {
-  min-height: 100vh;
   display: flex;
-  flex-wrap: wrap;
-
+  justify-content: center;
   flex-direction: column;
   align-items: flex-start;
   padding: clamp(1rem, 2vw, 2rem);
@@ -304,10 +301,10 @@ body {
 .hero-title {
   font-family: 'Sofia Sans Condensed Bold', sans-serif;
   font-weight: 900;
-  font-size: clamp(5rem, 12vw, 12rem);
+  font-size: clamp(5rem, 12vw, 20rem);
   line-height: 0.8;
   white-space: nowrap;
-  margin: 2rem 0 0.5rem 0;
+  margin: 1rem 0 0.5rem 0;
   color: var(--color-black);
   z-index: 3;
   text-align: justify;
@@ -352,10 +349,13 @@ body {
   justify-content: space-between;
   align-items: center;
 
-  width: clamp(280px, 80%, 600px);
-  min-height: clamp(400px, 30vh, 500px);
+  width: clamp(20rem, 40%, 80rem);
+  min-height: clamp(30vh, 55vh, 90vh);
 
-  margin: -1% auto 0 auto;
+  margin-top: clamp(-0.5rem, -0.7vh, -0.1rem);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
   padding: clamp(0.4rem, 1.2vw, 1rem);
 
   background: #1e1e1e;
@@ -383,9 +383,9 @@ body {
   margin: 0.4rem 0;
   text-align: left;
   font-family: 'Sofia Sans Mono', monospace;
-  font-size: clamp(1.6rem, 2.1vw, 1.6rem);
+  font-size: clamp(1rem, 1.5vw, 8rem);
   font-weight: 900;
-  line-height: 0.7;
+  line-height: 0.75;
 }
 
 .hero-image-container {
@@ -396,9 +396,9 @@ body {
 }
 
 .hero-image {
-  height: clamp(370px, 25vh, 600px);
+  height: clamp(20vh, 51vh, 80vh);
   width: auto;
-  border-radius: 6px;
+  border-radius: 0.5rem;
   box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
@@ -408,6 +408,7 @@ body {
   max-width: 60ch;
   text-align: center;
   font-family: 'Sofia Sans Mono', monospace;
+  font-size: clamp(1rem, 1.2vw, 3rem);
   color: var(--color-black);
   opacity: 0.8;
   margin-left: auto;
@@ -436,7 +437,7 @@ body {
 
 .about-title {
   font-family: 'Sofia Sans Condensed Bold', sans-serif;
-  font-size: clamp(4rem, 8vw, 7rem);
+  font-size: clamp(4rem, 8vw, 16rem);
   font-weight: 900;
   text-transform: uppercase;
   line-height: 1;
@@ -473,11 +474,10 @@ body {
   margin-top: 4%;
   background: #1e1e1e;
   font-family: "Menlo", "Courier New", monospace;
-  height: 400px;
+  height: clamp(15rem, 50vh, 45rem);
   border-radius: 6px;
   border: 1px solid #444;
   color: #e6e6e6;
-  font-size: 14px;
   line-height: 1.5;
   text-align: left;
   display: flex;
@@ -487,6 +487,7 @@ body {
 }
 
 .terminal-header {
+  align-items: center;
   position: relative;
   display: flex;
   justify-content: flex-start;
@@ -515,7 +516,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   color: #ccc;
-  font-size: 13px;
+  font-size: clamp(0.75rem, 0.8vw, 1rem);
   user-select: none;
 }
 
@@ -526,7 +527,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  font-size: 14px;
+  font-size: clamp(0.75rem, 0.8vw, 1rem);
   overflow-y: auto;
   scrollbar-width: thin;           
   scrollbar-color: #444 #1e1e1e;
@@ -575,7 +576,6 @@ body {
 #terminal-options div {
   cursor: pointer;
   color: #e6e6e6;
-  font-size: 14px;
   line-height: 1.5;
   transition: color 0.2s ease;
 }
@@ -590,17 +590,25 @@ body {
   background-color: var(--color-pink);
 }
 
+/*
+
+align-items: center;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+*/
+
 .popup {
   position: absolute;
   top: 20%;
   left: 20%;
-  width: 400px;
+  width: clamp(25rem, 30rem, 45rem);
   background: #1e1e1e;
   color: #e6e6e6;
   border: 1px solid #555;
   border-radius: 6px;
   font-family: "Menlo", "Courier New", monospace;
-  font-size: 13px;
+  font-size: clamp(0.5rem, 0.7vw, 1.2rem);
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
   z-index: 9999;
 }
@@ -636,13 +644,17 @@ body {
 }
 
 .popup-header {
+  align-items: center;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
   background: #2c2c2c;
   color: #e6e6e6;
   padding: 6px 10px;
   cursor: move;
   font-weight: bold;
   border-bottom: 1px solid #444;
-  font-size: 13px;
+  font-size: clamp(0.75rem, 0.9vw, 0.9rem);
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -665,12 +677,12 @@ body {
 .popup-header .title {
   color: #ccc;
   position: absolute;
-  left: 35%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .popup-body {
   padding: 1rem;
-  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -680,9 +692,9 @@ body {
 }
 
 .echo-line {
-  margin-top: 4px;
   font-family: inherit;
-  font-size: 14px;
+  font-size: clamp(0.75rem, 0.8vw, 1rem);
+  line-height: 1.5;
   color: #e6e6e6;
 }
 
@@ -702,7 +714,7 @@ body {
   color: var(--color-white);
   display: flex;
   flex-direction: column;
-  gap: clamp(1rem, 4vh, 3rem);
+  gap: clamp(1rem, 3vh, 2rem);
   margin-right: 5%;
   margin: clamp(1.5rem, 4vh, 3rem) clamp(1.5rem, 4vh, 3rem) 0 0;
 }
@@ -710,7 +722,7 @@ body {
 .about-text h2 {
   font-family: 'Sofia Sans Mono Light', monospace;
   margin-bottom: 0.5rem;
-  font-size: clamp(0.8rem, 1vw, 1rem);
+  font-size: clamp(0.8rem, 1vw, 1.5rem);
   color: var(--color-grey);
   font-weight: 300;
   line-height: 1.6;
@@ -720,7 +732,7 @@ body {
 .about-text p {
   line-height: 1.8;
   color: var(--color-light-grey);
-  font-size: clamp(0.9rem, 1vw, 1rem);
+  font-size: clamp(0.65rem, 1vw, 1.5rem);
   font-weight: 300;
 }
 
@@ -754,7 +766,7 @@ body {
 
 .projects-title {
   font-family: 'Sofia Sans Condensed Bold', sans-serif;
-  font-size: clamp(4rem, 8vw, 7rem);
+  font-size: clamp(4rem, 8vw, 16rem);
   font-weight: 900;
   text-transform: uppercase;
   line-height: 1;
@@ -819,7 +831,7 @@ body {
 .card-front h3 {
   font-family: 'Sofia Sans Condensed Bold', sans-serif;
   font-weight: 700;
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: clamp(1.5rem, 2.75vw, 2.5rem);
   line-height: 1.1;
   letter-spacing: -0.1em;
   margin-bottom: clamp(0.5rem, 1vh, 1rem);
@@ -856,14 +868,14 @@ body {
 }
 
 .card-number {
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-size: clamp(1rem, 1.5vw, 1.75rem);
   font-weight: bold;
   display: inline-block;
   transition: transform 0.6s ease, font-size 0.6s ease;
 }
 
 .project-card:hover .card-number {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
   transform: scale(1.2);
 }
 
@@ -893,14 +905,14 @@ body {
 
 .card-list li {
   text-align: left;
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(0.8rem, 1.5vw, 2rem);
   line-height: 1.1;
   letter-spacing: -0.1em;
 }
 
 .card-back img {
   display: block;
-  width: clamp(250px, 50%, 500px);
+  width: clamp(250px, 60%, 700px);
   height: auto;
   clip-path: inset(0 0 100% 0);
   transition: clip-path 0.2s ease-in-out;
@@ -916,8 +928,8 @@ body {
 .card-description {
   text-align: justify;
   margin-top: clamp(0.5rem, 2vh, 1.5rem);
-  font-size: clamp(0.9rem, 1.1vw, 1rem);
-  line-height: 1.5;
+  font-size: clamp(0.65rem, 1.1vw, 1.5rem);
+  line-height: 1.3;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.2s ease, transform 1s ease;
@@ -932,7 +944,7 @@ body {
 
 .card-back .card-number,
 .card-title {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: clamp(1.5rem, 2.75vw, 2.5rem);
   letter-spacing: -0.075em;
 }
 
@@ -956,7 +968,7 @@ body {
 }
 
 .connect-overline {
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 0.9vw, 1rem);
   text-transform: uppercase;
   letter-spacing: 0.6rem; 
   margin: 1rem 0;
@@ -965,7 +977,7 @@ body {
 
 .connect-title {
   font-family: 'Sofia Sans Condensed Bold', sans-serif;
-  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-size: clamp(2.5rem, 5vw, 7rem);
   font-weight: 900;
   text-transform: uppercase;
   line-height: 1;
@@ -975,7 +987,7 @@ body {
 }
 
 .connect-subline {
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 0.9vw, 1rem);
   text-transform: uppercase;
   letter-spacing: 0.6rem; 
   margin: 1rem 0;
@@ -998,7 +1010,7 @@ body {
 
 .form-group label {
   font-family: 'Sofia Sans Condensed', sans-serif; 
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 0.9vw, 1rem);
   letter-spacing: 1px;
   font-weight: 500;
   margin-bottom: 0.5rem;
@@ -1012,7 +1024,8 @@ body {
   border-bottom: 1px solid #000;
   background: transparent;
   padding: 0.6rem 0;
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 1vw, 1.25rem);
+
   font-family: inherit;
   outline: none;
   resize: none;
