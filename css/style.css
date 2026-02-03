@@ -301,7 +301,7 @@ body {
 .hero-title {
   font-family: 'Sofia Sans Condensed Bold', sans-serif;
   font-weight: 900;
-  font-size: clamp(5rem, 12vw, 20rem);
+  font-size: clamp(5rem, 10.25vw, 20rem);
   line-height: 0.8;
   white-space: nowrap;
   margin: 1rem 0 0.5rem 0;
@@ -352,7 +352,7 @@ body {
   width: clamp(20rem, 40%, 80rem);
   min-height: clamp(30vh, 55vh, 90vh);
 
-  margin-top: clamp(-0.5rem, -0.7vh, -0.1rem);
+  margin-top: clamp(-0.7rem, -0.7vh, -0.2rem);
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0;
